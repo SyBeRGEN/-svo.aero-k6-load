@@ -1,20 +1,14 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
-import {logFlights} from "./logger.js";
-import {getRandomDateRange} from "./dateCalculator.js";
-import {SharedArray} from "k6/data";
+import {logFlights} from "../logics/logger.js";
+import {getRandomDateRange} from "../logics/dateCalculator.js";
 
 export const options = {
     vus: 1,
     iterations: 2
 };
 
-const csvData = new SharedArray('Города', function () {
-    return open ('./cities.csv')
-        .split('./cities.csv')
-        .filter(line => line.trim() !== '')
-        .map(line => line.trim());
-});
+
 
 export default function () {
     const { startStr, endStr } = getRandomDateRange();
